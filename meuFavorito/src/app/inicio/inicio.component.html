@@ -1,12 +1,21 @@
-<h1>Inicio</h1>
-<h3>Lista de Titulos</h3>
+<div class="container">
+  
+  <div class="container col-12">
+    <div class="row text-center" *ngFor="let filmes of listaFilmes"> 
+             
+      <div class="card col-6 col-sm-4 col.md-3 col-lg-2" *ngFor="let f of filmes">
+        <div class="card mt-2">
+          <img *ngIf="f.poster_path" class="img-fluid" src="https://image.tmdb.org/t/p/w500{{f.poster_path}}">
+          <img *ngIf="!f.poster_path" class="img-fluid" src="https://placehold.it/500x740">
+        </div>          
+        <div class="content">
+          <div class="header">
+            {{f.title}}
+          </div>
+        </div>
+      </div> 
+         
+    </div>
+  </div>
 
-<ul>
-    
-    <li *ngFor="let c of listaFilmes">
-        
-        {{c.id}}
-        {{c.nome}}
-
-    </li>
-</ul>
+</div>

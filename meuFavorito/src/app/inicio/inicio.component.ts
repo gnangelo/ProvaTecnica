@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../service.service';
+import { Filmes } from '../models/filmeModel';
 
 @Component({
   selector: 'app-inicio',
@@ -8,16 +9,23 @@ import { ServiceService } from '../service.service';
 })
 export class InicioComponent implements OnInit {
 
-  listaFilmes: {};
-
+  listaFilmes: any; 
+  
   constructor(private serviceService: ServiceService) { }
 
-  ngOnInit(): void {
-    this.listaGet();
+  ngOnInit(): void {  
+    this.getLista()        
   }
 
-  listaGet() {
-    this.serviceService.listaGet().subscribe(dados=> this.listaFilmes = dados);
+  getLista(){
+    this.serviceService.getLista()
+      .subscribe(response=>{
+        this.listaFilmes=response;
+        this.listaFilmes = Array.of(this.listaFilmes.results);
+        console.log(this.listaFilmes);
+      }, error=>{
+        console.log(error);
+      });
   }
 
 }
